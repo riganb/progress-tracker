@@ -1,0 +1,46 @@
+{% extends 'base.html' %}
+{% block title %}
+Insert Question
+{% endblock title %}
+
+{% block body %}
+{% if msg %}
+<div class="container-fluid container-sm my-5 pt-5" style="max-width:667px">
+    <div class="alert alert-success">{{ msg }}</div>
+</div>
+{% elif fail_msg %}
+<div class="container-fluid container-md my-5 pt-5" style="max-width:667px">
+    <div class="alert alert-danger">{{ fail_msg }}</div>
+</div>
+{% endif %}
+<div class="container-fluid container-md pt-5" style="max-width:667px">
+<form action="/insert-question" method="post" autocomplete="off">
+    <div class="mb-3 mt-3">
+        <label for="qlink" class="form-label" style="margin-right: 10px;">Link:</label><br>
+		<a class="btn btn-outline-dark form-control" style="overflow-x: hidden;" id="link" name="link">
+			{{ qdata['qlink'] }}
+		</a>
+		<input type="hidden" name="qlink" id="qlink" value="{{ qdata['qlink'] }}">
+    </div>
+    <div class="mb-3 mt-3">
+        <label for="uid" class="form-label">Problem Title:</label>
+        <input type="text" value="{{ qdata['qname'] }}" class="form-control" id="uid" name="uid" readonly>
+    </div>
+    <div class="mb-3 mt-3">
+        <label for="uid" class="form-label" style="margin-right: 10px;">Difficulty Level:</label>
+		<a class="btn btn-warning text-black" style="margin-right: 10px;">{{ qdata['difficulty'] }}</a>
+    </div>
+    <div class="mb-3 mt-3">
+        <label for="uid" class="form-label" style="margin-right: 10px;">Platform:</label>
+		<a class="btn btn-success" href="{{ qdata['plink'] }}" target="_blank">{{ qdata['platform'] }}</a>
+    </div>
+    <div class="mb-3 mt-3">
+        <label for="uid" class="form-label" style="margin-right: 10px;">Topics:</label>
+		{% for topic in qdata['topics'] %}
+			<a class="btn btn-info text-black" style="margin-right: 10px; margin-top: 5px;">{{ topic }}</a>
+		{% endfor %}
+    </div>
+    <button type="submit" class="btn btn-primary mt-3 p-3 pt-2 pb-2">Submit</button>
+</form>
+</div>
+{% endblock body %}

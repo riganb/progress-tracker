@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en" style="height: 100%;">
+
+<head>
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+
+  <title>{% block title %}{% endblock title %}</title>
+
+  <link href="/css" rel="stylesheet" />
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+  <style>
+    body {
+      width:100%;
+      height: 100%;
+      /* background: linear-gradient(45deg,#F17C58, #E94584, #24AADB , #27DBB1,#FFDC18, #FF3706); */
+      background: linear-gradient(45deg,#e9a08a, #e98fb1, #93cbdf , #93decc,#dfd7a8, #fe9c84);
+      background-size: 600% 100%;
+      animation: gradient 8s linear infinite;
+      animation-direction: alternate;
+    }
+    @keyframes gradient {
+      0% {background-position: 0%}
+      100% {background-position: 100%}
+    }
+    a {
+      color: #93c9ff;
+    }
+    a:hover {
+      color: #ce93ff;
+    }
+    /* label {
+      font-weight: bold;
+    } */
+  </style>
+</head>
+
+<!-- style="background: url(/bg); background-size: cover;" -->
+<!-- <body style="background-color: #ffffff; background-image: linear-gradient(to bottom, #fddfff, #cfe2f3); background-repeat: no-repeat;"> -->
+<body>
+  <!-- #b8a7aa, #83616e, #b8a7aa background-image: linear-gradient(to bottom, #92a4be, #506477)-->
+  <nav class="navbar navbar-expand-md bg-dark navbar-dark">
+    <div class="container-fluid" style="width: 100%;">
+      <a class="navbar-brand" style="margin-left: 24px; margin-right: 36px;">PPT</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-expanded="false" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+      <div class="navbar-nav">
+        <a class="nav-link" href="/" style="margin-right: 36px;">Home</a>
+        <a class="nav-link" href="/users" style="margin-right: 36px;">Users</a>
+        <a class="nav-link" href="/questions" style="margin-right: 36px;">Questions</a>
+        <a class="nav-link" href="/attempts" style="margin-right: 36px;">Attempts</a>
+        <a class="nav-link" href="/platforms" style="margin-right: 36px;">Platforms</a>
+        <a class="nav-link" href="/stats" style="margin-right: 36px;">Stats</a>
+      </div>
+      </div>
+    </div>
+  </nav>
+
+  {% block body %}
+  {% endblock body %}
+</body>
+
+</html>

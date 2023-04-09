@@ -1,0 +1,11 @@
+{% extends 'base.html' %}
+{% block title %}
+Uh-Oh!
+{% endblock title %}
+
+{% block body %}
+<script>
+	alert("Wrong email format!");
+	history.back()
+</script>
+{% endblock body %}

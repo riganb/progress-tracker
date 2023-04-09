@@ -1,0 +1,44 @@
+{% extends 'base.html' %}
+{% block title %}
+Create User
+{% endblock title %}
+
+{% block body %}
+{% if msg %}
+<div class="container-fluid container-sm my-5" style="max-width:667px">
+    <div class="alert alert-success">{{ msg }}</div>
+</div>
+{% elif fail_msg %}
+<div class="container-fluid container-md my-5" style="max-width:667px">
+    <div class="alert alert-danger">{{ fail_msg }}</div>
+</div>
+{% endif %}
+<div class="container-fluid container-md my-5" style="max-width:667px">
+<form action="/add-attempt" method="post" autocomplete="off">
+	<div class="mb-3">
+        <label for="uid" class="form-label">User:</label>
+        <select class="form-select" id="uid" name="uid">
+			{% for user in users %}
+            	<option value="{{ user[0] }}">{{ user[0] }} - {{ user[1] }}</option>
+			{% endfor %}
+        </select>
+    </div>
+	<div class="mb-3">
+        <label for="qid" class="form-label">Question:</label>
+        <select class="form-select" id="qid" name="qid">
+			{% for question in questions %}
+            	<option value="{{ question[0] }}">{{ question[0][:5] + '..' }} - {{ question[1] }}</option>
+			{% endfor %}
+        </select>
+    </div>
+	<div class="mb-3">
+        <label for="solved" class="form-label">Solved:</label>
+        <select class="form-select" id="solved" name="solved">
+            <option value="Yes">Yes</option>
+            <option value="No">No</option>
+        </select>
+    </div>
+    <button type="submit" class="btn btn-primary mt-3">Submit</button>
+</form>
+</div>
+{% endblock body %}

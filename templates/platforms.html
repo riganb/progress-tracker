@@ -1,0 +1,46 @@
+{% extends 'base.html' %} {% block title %} Platforms {% endblock title %} {%
+block body %} {% if del_msg %}
+<div class="container-fluid container-sm my-5 pt-5" style="max-width: 667px">
+  <div class="alert alert-success">{{ del_msg }}</div>
+</div>
+{% elif del_fail %}
+<div class="container-fluid container-md my-5 pt-5" style="max-width: 667px">
+  <div class="alert alert-danger">{{ del_fail }}</div>
+</div>
+{% endif %}
+<div class="container my-3">
+  <a href="mailto:therealriganb@gmail.com?Subject=Request%20for%20a%20new%20platform%20support." class="btn btn-primary">Request New Platform</a>
+</div>
+<div class="container my-3" style="overflow-x: auto;">
+  {% if data %}
+  <table class="table table-dark table-hover table-bordered table-striped">
+    <thead>
+      <tr>
+        {% for heading in headings %}
+        <th>{{ heading }}</th>
+        {% endfor %}
+        <th>DELETE</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for row in data %}
+      <tr>
+        <td>{{ row[0] }}</td>
+        <td>{{ row[1] }}</td>
+        <td><strong><a href="{{ row[2] }}" target="_blank" style="text-decoration: solid;">{{ row[2] }}</a></strong></td>
+        <td>
+          <form method="POST" action="/platforms/{{ row[0] }}">
+            <button type="submit" class="btn btn-danger" disabled>
+              Delete
+            </button>
+          </form>
+        </td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+  {% elif not del_msg and not del_fail %}
+  <div class="alert alert-warning">{{ msg }}</div>
+  {% endif %}
+</div>
+{% endblock body %}

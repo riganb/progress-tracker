@@ -1,0 +1,80 @@
+{% extends 'base.html' %} {% block title %} Questions {% endblock title %} {%
+block body %} {% if del_msg %}
+<div class="container-fluid container-sm my-3 pt-2" style="max-width: 667px">
+  <div class="alert alert-success">{{ del_msg }}</div>
+</div>
+{% elif del_fail %}
+<div class="container-fluid container-md my-3 pt-2" style="max-width: 667px">
+  <div class="alert alert-danger">{{ del_fail }}</div>
+</div>
+{% elif warning %}
+<div class="container-fluid container-md my-3 pt-2" style="max-width: 667px">
+  <div class="alert alert-warning" style="text-align: center;">{{ warning }}</div>
+</div>
+{% endif %}
+<div class="container-fluid mt-2" style="max-width: 667px">
+  <form
+    class="form-inline"
+    action="/insert-question"
+    method="get"
+    autocomplete="off"
+  >
+    <table class="table">
+      <tr>
+        <td style="vertical-align: middle; text-align: end;">
+          <label for="qlink"><a class="btn btn-dark">Question Link:</a></label>
+        </td>
+        <td style="vertical-align: top;">
+          <input
+            type="text"
+            class="form-control"
+            id="qlink"
+            placeholder="Enter Question Link"
+            name="qlink"
+            required
+          />
+        </td>
+        <td>
+          <button type="submit" class="btn btn-primary">Insert Question</button>
+        </td>
+      </tr>
+    </table>
+  </form>
+</div>
+<div class="container my-3" style="overflow-x: auto;">
+  {% if data %}
+  <table class="table table-dark table-hover table-bordered table-striped">
+    <thead>
+      <tr>
+        {% for heading in headings %}
+        <th>{{ heading }}</th>
+        {% endfor %}
+        <th>DELETE</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for row in data %}
+      <tr>
+        <td style="vertical-align: middle;">{{ row[0][:5]+'..' }}</td>
+        <td style="vertical-align: middle;"><a href="{{ row[2] }}" target="_blank">{{ row[1] }}</a></td>
+        <td style="vertical-align: middle;"><a href="{{ row[8] }}" target="_blank">{{ row[7] }}</a></td>
+        <td style="vertical-align: middle;">{{ row[4] }}</td>
+        <td style="vertical-align: middle;">
+          {% for topic in row[5].split(',') %}
+            <a href="#" class="btn btn-warning my-2">{{ topic }}</a>
+          {% endfor %}
+        </td>
+        <td style="vertical-align: middle;">
+          <form method="POST" action="/questions/{{ row[0] }}">
+            <button type="submit" class="btn btn-danger">Delete</button>
+          </form>
+        </td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+  {% elif msg %}
+  <div class="alert alert-warning">{{ msg }}</div>
+  {% endif %}
+</div>
+{% endblock body %}

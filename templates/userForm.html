@@ -1,0 +1,45 @@
+{% extends 'base.html' %}
+{% block title %}
+Create User
+{% endblock title %}
+
+{% block body %}
+{% if msg %}
+<div class="container-fluid container-sm my-5" style="max-width:667px">
+    <div class="alert alert-success">{{ msg }}</div>
+</div>
+{% elif fail_msg %}
+<div class="container-fluid container-md my-5" style="max-width:667px">
+    <div class="alert alert-danger">{{ fail_msg }}</div>
+</div>
+{% endif %}
+<div class="container-fluid container-md my-5" style="max-width:667px">
+<form action="/create-user" method="post" autocomplete="off">
+    <div class="mb-3 mt-3">
+        <label for="uid" class="form-label">User ID:</label>
+        <input type="number" class="form-control" id="uid" placeholder="Enter User ID" name="uid" min="1" required>
+    </div>
+    <div class="mb-3">
+        <label for="uname" class="form-label">Name:</label>
+        <input type="text" class="form-control" id="uname" placeholder="Enter Name" name="uname" required>
+    </div>
+    <div class="mb-3 mt-3">
+        <label for="age" class="form-label">Age:</label>
+        <input type="number" min="1" max="100" class="form-control" id="age" placeholder="Enter Age" name="age">
+    </div>
+	<div class="mb-3">
+        <label for="desg" class="form-label">Designation:</label>
+        <select class="form-select" id="desg" name="desg">
+            <option value="Student">Student</option>
+            <option value="Teacher">Teacher</option>
+            <option value="Professional">Professional</option>
+        </select>
+    </div>
+    <div class="mb-3 mt-3">
+        <label for="mail" class="form-label">Email Address:</label>
+        <input type="text" min="1" max="100" class="form-control" id="mail" placeholder="Enter Email Address" name="mail">
+    </div>
+    <button type="submit" class="btn btn-primary">Submit</button>
+</form>
+</div>
+{% endblock body %}
